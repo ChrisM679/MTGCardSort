@@ -1,3 +1,4 @@
+// Cole
 const form = document.getElementById('search-form');
 const queryInput = document.getElementById('card-query');
 const statusMessage = document.getElementById('status-message');
