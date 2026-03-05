@@ -238,6 +238,29 @@ nav a:hover {
     text-decoration: underline;
 }
 
+.add-card-button {
+    display: inline-block;
+    margin-top: 0.65rem;
+    padding: 0.45rem 0.8rem;
+    border: 1px solid #5b66e4;
+    border-radius: 8px;
+    background: #eef0ff;
+    color: #3846d2;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.add-card-button:hover {
+    background: #e2e7ff;
+}
+
+.add-card-button:disabled {
+    border-color: #b9bfd6;
+    background: #f1f3f8;
+    color: #7a8196;
+    cursor: not-allowed;
+}
+
 .source-badge {
     position: absolute;
     top: 1rem;

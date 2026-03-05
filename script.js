@@ -5,6 +5,41 @@ const statusMessage = document.getElementById('status-message');
 const resultsGrid = document.getElementById('results-grid');
 
 const SCRYFALL_URL = 'https://api.scryfall.com/cards/search';
+const MY_CARDS_STORAGE_KEY = 'myCards';
+let currentSearchCards = [];
+
+function getMyCards() {
+    try {
+        const storedCards = localStorage.getItem(MY_CARDS_STORAGE_KEY);
+        const parsedCards = JSON.parse(storedCards || '[]');
+        return Array.isArray(parsedCards) ? parsedCards : [];
+    } catch {
+        return [];
+    }
+}
+
+function saveMyCards(cards) {
+    localStorage.setItem(MY_CARDS_STORAGE_KEY, JSON.stringify(cards));
+}
+
+function getCardKey(card) {
+    return `${card.id}|${card.name}|${card.setName}`;
+}
+
+function addCardToMyCards(card) {
+    const currentCards = getMyCards();
+    const nextCardKey = getCardKey(card);
+    const alreadyExists = currentCards.some((existingCard) => getCardKey(existingCard) === nextCardKey);
+
+    if (alreadyExists) {
+        return { added: false, message: `${card.name} is already in My Cards.` };
+    }
+
+    const updatedCards = [...currentCards, card];
+    saveMyCards(updatedCards);
+
+    return { added: true, message: `Added ${card.name} to My Cards.` };
+}
 
 function isDefaultCardBackImage(imageUrl) {
     if (!imageUrl) {
@@ -34,6 +69,7 @@ function clearResults() {
 
 function renderResults(cards) {
     clearResults();
+    currentSearchCards = cards;
 
     if (!cards.length) {
         setStatus('No cards found for this query.', 'warning');
@@ -41,10 +77,12 @@ function renderResults(cards) {
     }
 
     const fragment = document.createDocumentFragment();
+    const existingCardKeys = new Set(getMyCards().map(getCardKey));
 
     cards.forEach((card) => {
         const cardElement = document.createElement('article');
         cardElement.className = 'card-item';
+        const cardAlreadyAdded = existingCardKeys.has(getCardKey(card));
 
         const imageHtml = card.image
             ? `<img src="${card.image}" alt="${card.name}" loading="lazy">`
@@ -58,6 +96,7 @@ function renderResults(cards) {
                 <p class="card-meta">Mana: ${card.manaCost || 'N/A'} | Set: ${card.setName || 'N/A'}</p>
                 <p class="card-meta">Rarity: ${card.rarity || 'N/A'}</p>
                 <a class="card-link" href="${card.url}" target="_blank" rel="noopener noreferrer">View details</a>
+                <button type="button" class="add-card-button" data-card-id="${card.id}" ${cardAlreadyAdded ? 'disabled' : ''}>${cardAlreadyAdded ? 'Added' : 'Add to My Cards'}</button>
                 <span class="source-badge">${card.source}</span>
             </div>
         `;
@@ -145,5 +184,29 @@ document.addEventListener('DOMContentLoaded', function () {
                 target.scrollIntoView({ behavior: 'smooth' });
             }
         });
+    });
+
+    resultsGrid.addEventListener('click', function (event) {
+        const addButton = event.target.closest('.add-card-button');
+
+        if (!addButton) {
+            return;
+        }
+
+        const cardId = addButton.dataset.cardId;
+        const selectedCard = currentSearchCards.find((card) => card.id === cardId);
+
+        if (!selectedCard) {
+            setStatus('Could not find that card in current results.', 'error');
+            return;
+        }
+
+        const result = addCardToMyCards(selectedCard);
+        setStatus(result.message, result.added ? 'success' : 'warning');
+
+        if (result.added) {
+            addButton.textContent = 'Added';
+            addButton.disabled = true;
+        }
     });
 });
