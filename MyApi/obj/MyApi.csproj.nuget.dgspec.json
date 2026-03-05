@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\akohn\\Downloads\\Folder\\MTGCardSort\\MyApi\\MyApi.csproj": {}
+    "C:\\Users\\akohn\\Downloads\\Folder\\MTGCardSort\\MyApi\\MyApi.csproj": {}
   },
   "projects": {
-    "c:\\Users\\akohn\\Downloads\\Folder\\MTGCardSort\\MyApi\\MyApi.csproj": {
+    "C:\\Users\\akohn\\Downloads\\Folder\\MTGCardSort\\MyApi\\MyApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\akohn\\Downloads\\Folder\\MTGCardSort\\MyApi\\MyApi.csproj",
+        "projectUniqueName": "C:\\Users\\akohn\\Downloads\\Folder\\MTGCardSort\\MyApi\\MyApi.csproj",
         "projectName": "MyApi",
-        "projectPath": "c:\\Users\\akohn\\Downloads\\Folder\\MTGCardSort\\MyApi\\MyApi.csproj",
+        "projectPath": "C:\\Users\\akohn\\Downloads\\Folder\\MTGCardSort\\MyApi\\MyApi.csproj",
         "packagesPath": "C:\\Users\\akohn\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\akohn\\Downloads\\Folder\\MTGCardSort\\MyApi\\obj\\",
+        "outputPath": "C:\\Users\\akohn\\Downloads\\Folder\\MTGCardSort\\MyApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

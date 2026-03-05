@@ -1,9 +1,11 @@
 
+using System.ComponentModel.DataAnnotations;
+
 namespace MyApi.Models;
 public class Card()
 {
-    
-    private int Id {get; set;}
-    private string name;
+    [Key]
+    public int Id {get; set;}
+    public string name;
 
 }

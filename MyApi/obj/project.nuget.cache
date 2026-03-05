@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "m6xa+a/mYF8=",
+  "dgSpecHash": "O7UbzHpNkcI=",
   "success": true,
-  "projectFilePath": "c:\\Users\\akohn\\Downloads\\Folder\\MTGCardSort\\MyApi\\MyApi.csproj",
+  "projectFilePath": "C:\\Users\\akohn\\Downloads\\Folder\\MTGCardSort\\MyApi\\MyApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\akohn\\.nuget\\packages\\azure.core\\1.47.1\\azure.core.1.47.1.nupkg.sha512",
     "C:\\Users\\akohn\\.nuget\\packages\\azure.identity\\1.14.2\\azure.identity.1.14.2.nupkg.sha512",
