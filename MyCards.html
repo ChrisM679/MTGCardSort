@@ -19,11 +19,29 @@
         </div>
     </header>
 
+    <section class="results-section" id="my-cards">
+    <div class="container">
+        <h2>My Cards</h2>
+        <div id="results-grid" class="results-grid" aria-live="polite"></div>
+    </div>
+</section>
+
     <footer>
         <div class="container">
             <p>&copy; 2026 MTG Card Search</p>
             <p>Magic: The Gathering is a trademark of Wizards of the Coast.</p>
         </div>
     </footer>
+
+    <script src="script.js"></script>
+<script>
+async function loadMyCards() {
+    const response = await fetch('http://localhost:5274/api/cards');
+    const cards = await response.json();
+    renderResults(cards); // reuse the same renderResults function
+}
+
+document.addEventListener('DOMContentLoaded', loadMyCards);
+</script>
 </body>
 </html>

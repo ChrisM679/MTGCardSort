@@ -59,10 +59,40 @@ function renderResults(cards) {
                 <p class="card-meta">Rarity: ${card.rarity || 'N/A'}</p>
                 <a class="card-link" href="${card.url}" target="_blank" rel="noopener noreferrer">View details</a>
                 <span class="source-badge">${card.source}</span>
+                <button class="add-card-button" data-card-id="${card.id}">Add to My Cards</button>
             </div>
         `;
 
         fragment.appendChild(cardElement);
+
+        cardElement.querySelector('.add-card-button').addEventListener('click', async () => {
+    const cardId = card.id; // same as data-card-id
+    try {
+        const response = await fetch('http://localhost:5274/api/cards', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+    source: card.source,
+    name: card.name,
+    type: card.type,
+    manaCost: card.manaCost,
+    setName: card.setName,
+    rarity: card.rarity,
+    url: card.url,
+    image: card.image
+})
+        });
+
+        if (!response.ok) {
+            const text = await response.text();
+            throw new Error(text || 'Failed to save card');
+        }
+
+        setStatus(`Added "${card.name}" to My Cards!`, 'success');
+    } catch (err) {
+        setStatus(`Error: ${err.message}`, 'error');
+    }
+});
     });
 
     resultsGrid.appendChild(fragment);
