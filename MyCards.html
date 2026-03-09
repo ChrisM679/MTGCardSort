@@ -20,22 +20,12 @@
         </div>
     </header>
 
-    <main>
-        <section class="hero">
-            <div class="container">
-                <h1>My Cards</h1>
-                <p>Your saved cards from search results.</p>
-                <p id="my-cards-status" class="status-message" aria-live="polite"></p>
-            </div>
-        </section>
-
-        <section class="results-section">
-            <div class="container">
-                <h2>Saved Collection</h2>
-                <div id="my-cards-grid" class="results-grid" aria-live="polite"></div>
-            </div>
-        </section>
-    </main>
+    <section class="results-section" id="my-cards">
+    <div class="container">
+        <h2>My Cards</h2>
+        <div id="results-grid" class="results-grid" aria-live="polite"></div>
+    </div>
+</section>
 
     <footer>
         <div class="container">
@@ -44,6 +34,15 @@
         </div>
     </footer>
 
-    <script src="mycards.js"></script>
+    <script src="script.js"></script>
+<script>
+async function loadMyCards() {
+    const response = await fetch('http://localhost:5274/api/cards');
+    const cards = await response.json();
+    renderResults(cards); // reuse the same renderResults function
+}
+
+document.addEventListener('DOMContentLoaded', loadMyCards);
+</script>
 </body>
 </html>
