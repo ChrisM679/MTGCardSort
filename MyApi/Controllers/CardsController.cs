@@ -17,19 +17,23 @@ public class CardsController : ControllerBase
 
     // POST api/cards - Add a card to the database
     [HttpPost]
-    public async Task<IActionResult> AddCard([FromBody] Card card)
-    {
-        if (card == null) return BadRequest();
+public async Task<IActionResult> AddCard([FromBody] Card card)
+{
+    if (card == null) 
+        return BadRequest("Card data is required.");
 
-        // Prevent duplicates
-        if (_context.Cards.Any(c => c.Id == card.Id))
-            return Conflict("Card already exists");
+    // Ensure EF treats this as a new entity
+    card.Id = 0;
 
-        _context.Cards.Add(card);
-        await _context.SaveChangesAsync();
+    // Prevent duplicates based on Name + SetName
+    if (_context.Cards.Any(c => c.Name == card.Name && c.SetName == card.SetName))
+        return Conflict("Card already exists in the database.");
 
-        return Ok(card);
-    }
+    _context.Cards.Add(card);
+    await _context.SaveChangesAsync();
+
+    return Ok(card);
+}
 
     // GET api/cards - Retrieve all stored cards
     [HttpGet]
