@@ -98,7 +98,7 @@ function renderResults(cards) {
                 <a class="card-link" href="${card.url}" target="_blank" rel="noopener noreferrer">View details</a>
                 <button type="button" class="add-card-button" data-card-id="${card.id}" ${cardAlreadyAdded ? 'disabled' : ''}>${cardAlreadyAdded ? 'Added' : 'Add to My Cards'}</button>
                 <span class="source-badge">${card.source}</span>
-                <button class="add-card-button" data-card-id="${card.id}">Add to My Cards</button>
+
             </div>
         `;
 

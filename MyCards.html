@@ -1,48 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MTG Card Inventory</title>
-    <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MTG Card Inventory</title>
+<link rel="stylesheet" href="styles.css">
 </head>
-<body>
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo"> MTG Card Inventory</div>
-                <nav>
-                    <a href="Home.html">Home</a>
-                    <a href="Search.html">Search Cards</a>
-                    <a href="MyCards.html">My Cards</a>
-                </nav>
-            </div>
-        </div>
-    </header>
 
-    <section class="results-section" id="my-cards">
-    <div class="container">
-        <h2>My Cards</h2>
-        <div id="results-grid" class="results-grid" aria-live="polite"></div>
-    </div>
+<body>
+
+<header>
+<div class="container">
+<div class="header-content">
+<div class="logo">MTG Card Inventory</div>
+<nav>
+<a href="Home.html">Home</a>
+<a href="Search.html">Search Cards</a>
+<a href="MyCards.html">My Cards</a>
+</nav>
+</div>
+</div>
+</header>
+
+<section class="results-section">
+<div class="container">
+<h2>My Cards</h2>
+
+<p id="status-message"></p>
+
+<div id="cards-grid" class="results-grid"></div>
+
+</div>
 </section>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 MTG Card Search</p>
-            <p>Magic: The Gathering is a trademark of Wizards of the Coast.</p>
-        </div>
-    </footer>
+<footer>
+<div class="container">
+<p>&copy; 2026 MTG Card Search</p>
+<p>Magic: The Gathering is a trademark of Wizards of the Coast.</p>
+</div>
+</footer>
 
-    <script src="script.js"></script>
-<script>
-async function loadMyCards() {
-    const response = await fetch('http://localhost:5274/api/cards');
-    const cards = await response.json();
-    renderResults(cards); // reuse the same renderResults function
-}
+<script src="mycards.js"></script>
 
-document.addEventListener('DOMContentLoaded', loadMyCards);
-</script>
 </body>
 </html>

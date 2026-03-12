@@ -37,4 +37,21 @@ public class CardsController : ControllerBase
     {
         return Ok(_context.Cards.ToList());
     }
+
+    // DELETE api/cards/{id} - Remove a card
+[HttpDelete("{id}")]
+public async Task<IActionResult> DeleteCard(int id)
+{
+    var card = await _context.Cards.FindAsync(id);
+
+    if (card == null)
+    {
+        return NotFound();
+    }
+
+    _context.Cards.Remove(card);
+    await _context.SaveChangesAsync();
+
+    return NoContent();
+}
 }
