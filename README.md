@@ -118,6 +118,7 @@ Example request body:
 - CORS is currently configured with an `AllowAll` policy in `MyApi/Program.cs` for local development.
 - Scryfall search is performed directly from the frontend in `script.js`.
 - The repository currently includes `mycards.js`, but `MyCards.html` uses `script.js` to render saved cards from the backend API.
+- To run automated tests change directory to MyApi.Tests and then run the command dotnet test
 
 ## Development Commands
 
